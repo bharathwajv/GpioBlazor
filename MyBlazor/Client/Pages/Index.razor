@@ -1,0 +1,55 @@
+﻿@page "/"
+@inherits IndexPage
+
+<h1>Hello, blinky!</h1>
+
+<p>Led is @BlinkyStatus</p>
+
+<div>
+    <button class="btn btn-success" @onclick="@StartBlinking">Start blinking</button> |
+    <button class="btn btn-danger" @onclick="@StopBlinking">Stop blinking</button>
+</div>
+
+<div class="d-flex flex-wrap">
+    @{ for (int i = 0; i < @ItemCount; i++)
+        {
+            <div class="card" style="width: 350px; height :500px; padding: 15px; margin: 15px">
+                <img src="https://i.pravatar.cc/300?img={@i}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Name title</h5>
+                    <p class="card-text">Left quantity :</p>
+                    <div class="def-number-input number-input safari_only mb-0 w-100">
+                        <button onclick="this.parentNode.querySelector('input[type=number]').stepDown(500)"
+                                class="minus decrease">-</button>
+                        <input class="quantity" min="0" name="quantity" value="0" type="number">
+                        <button onclick="this.parentNode.querySelector('input[type=number]').stepUp(500)"
+                                class="plus increase">+</button>
+                    </div>
+                    <small id="passwordHelpBlock" class="form-text text-muted text-center">
+                        (Note, 1 piece)
+                    </small>
+                </div>
+                    <a href="#" class="btn btn-primary">Place order</a>
+                </div>
+            
+        }
+    }
+</div>
+
+@code{
+    string schema = "";
+    int ItemCount = 10;
+
+    protected override void OnInitialized()
+    {
+        try
+        {
+            //schema = System.IO.File.ReadAllText("WeatherSchema.json");
+
+        }
+        catch (Exception mes)
+        {
+            Console.WriteLine(mes);
+        }
+    }
+}
