@@ -34,5 +34,10 @@ namespace MyBlazor.Server.Controllers
         {
             _blinkClient.StopBlinking();
         }
+        [HttpGet("{pinNumber}/{neededQuantity}")]
+        public void StartBlinking(int pinNumber, int neededQuantity)
+        {
+            _blinkClient.StartBlinking(pinNumber, neededQuantity);
+        }
     }
 }

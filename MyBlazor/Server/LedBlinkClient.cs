@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyBlazor.Server.Controllers;
+using System;
 using System.Collections.Generic;
 using System.Device.Gpio;
 using System.Linq;
@@ -116,36 +117,23 @@ namespace MyBlazor.Server
             Dispose(true);
         }
 
-        //public void StartBlinking()
-        //{
+        public void StartBlinking(int pinNumber, int neededQuantity)
+        {
 
-        //    Console.WriteLine("Hello World!");
+            Console.WriteLine(pinNumber);
+            Console.WriteLine(neededQuantity);
 
-        //    GpioController controller = new GpioController(PinNumberingScheme.Board);
+            GpioController controller = new GpioController(PinNumberingScheme.Board);
 
-        //    var pin = 10;
-        //    var lightTime = 300;
+            var pin = pinNumber;
 
-        //    controller.OpenPin(pin, PinMode.Output);
+            controller.OpenPin(pin, PinMode.Output);
 
-        //    try
-        //    {
-        //        while (true)
-        //        {
-        //            controller.Write(pin, PinValue.High);
-        //            Console.WriteLine("High");
-        //            Thread.Sleep(lightTime);
-        //            controller.Write(pin, PinValue.Low);
-        //            Console.WriteLine("Lowww");
-        //            Thread.Sleep(lightTime);
-        //        }
-        //    }
-        //    finally
-        //    {
-        //        controller.ClosePin(pin);
-        //    }
+            controller.Write(pin, PinValue.High);
+            Thread.Sleep(neededQuantity);
+            controller.Write(pin, PinValue.Low);
 
 
-        //}
+        }
     }
 }

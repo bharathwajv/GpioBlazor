@@ -1,8 +1,6 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -10,6 +8,12 @@ namespace MyBlazor.Client.Pages
 {
     public class IndexPage : ComponentBase
     {
+        public static List<Item> ItemList = new List<Item>() { new Item { itemID = 5,itemName = "Coke", pinNumber = 11 ,leftAmount =5000},
+         new Item { itemID = 6,itemName = "Pepsi", pinNumber = 12 ,leftAmount =5000},
+         new Item { itemID = 45,itemName = "7up", pinNumber = 13 ,leftAmount =5000},
+         new Item { itemID = 23,itemName = "Beer", pinNumber = 15 ,leftAmount =5000 } };
+
+
         [Inject]
         public HttpClient HttpClient { get; set; }
 
@@ -28,6 +32,10 @@ namespace MyBlazor.Client.Pages
         protected async Task StartBlinking()
         {
             await HttpClient.GetStringAsync("/api/Blinky/StartBlinking");
+        }
+        protected async Task StartBlinking(int pinNumber, int neededQuantity)
+        {
+            await HttpClient.GetStringAsync("/api/Blinky/StartBlinking/"+ pinNumber+"/"+ neededQuantity);
         }
 
         protected async Task StopBlinking()
