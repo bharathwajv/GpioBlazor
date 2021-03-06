@@ -55,7 +55,7 @@ namespace MyBlazor.Server
                                 break;
                             }
                             
-                            controller.Write(LedPin, PinValue.High);
+                            controller.Write(LedPin, PinValue.Low);
                             //Thread.Sleep(LightTimeInMilliseconds);
                             //controller.Write(LedPin, PinValue.Low);
                             //Thread.Sleep(DimTimeInMilliseconds);
@@ -120,18 +120,40 @@ namespace MyBlazor.Server
         public void StartBlinking(int pinNumber, int neededQuantity)
         {
 
-            Console.WriteLine(pinNumber);
-            Console.WriteLine(neededQuantity);
+                if (_blinkTask != null)
+                {
+                    return;
+                }
 
-            GpioController controller = new GpioController(PinNumberingScheme.Board);
+                _tokenSource = new CancellationTokenSource();
+                _token = _tokenSource.Token;
 
-            var pin = pinNumber;
+                  _blinkTask = new Task(() =>
+                {
+                    using (var controller = new GpioController(PinNumberingScheme.Board))
+                    {
+                        controller.OpenPin(pinNumber, PinMode.Output);
 
-            controller.OpenPin(pin, PinMode.Output);
+                        _isBlinking = true;
+                        Console.WriteLine("Entered custom");
+                        while (true)
+                        {
+                            if (_token.IsCancellationRequested)
+                            {
+                                break;
+                            }
+                            Console.WriteLine("Drop quantity "+neededQuantity);
+                            controller.Write(pinNumber, PinValue.Low);
+                            Thread.Sleep(neededQuantity);
+                            controller.Write(pinNumber, PinValue.High);
+                            Thread.Sleep(neededQuantity);
+                        }
 
-            controller.Write(pin, PinValue.High);
-            Thread.Sleep(neededQuantity);
-            controller.Write(pin, PinValue.Low);
+                        _isBlinking = false;
+                    }
+                });
+                _blinkTask.Start();
+            
 
 
         }

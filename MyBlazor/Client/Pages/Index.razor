@@ -1,9 +1,9 @@
 ﻿@page "/"
 @inherits IndexPage
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
 
-<h1>Hello, blinky!</h1>
+<h1>What do you like to place !<i class="bi bi-droplet-half"></i></h1>
 
 <p>Led is @BlinkyStatus</p>
 
@@ -15,27 +15,65 @@
 <div class="d-flex flex-wrap">
     @{ foreach (Item item in ItemList)
         {
-        <div class="card" style="width: 350px; height :600px; padding: 15px; margin: 15px">
-            <img src="https://i.pravatar.cc/300?img={@item.itemID}" class="card-img-top" alt="...">
+        <div class="card" style="width: 400px; height :600px; padding: 15px; margin: 15px">
+            @{ if (item.itemName.Equals("Coke"))
+            {
+                <img src='/images/Coke.png'>
+            }
+            else if (item.itemName.Equals("Pepsi"))
+            {
+                <img src='/images/Pepsi.png'>
+            }
+
+            else if (item.itemName.Equals("7up"))
+            {
+                <img src='/images/7up.png'>
+            }
+            else if (item.itemName.Equals("Bear"))
+            {
+                <img src='/images/Bear.png'>
+            }
+        }
+            <!--<img src="https://i.pravatar.cc/300?img={@item.itemID}" class="card-img-top" alt="...">--> @*//https://i.pravatar.cc/300?img={@item.itemID}*@
             <div class="card-body">
                 <h5 class="card-title">@item.itemName</h5>
                 <p class="card-text">Left quantity : @item.leftAmount</p>
                 <div class="def-number-input number-input safari_only mb-0 w-100">
                     <button onclick="this.parentNode.querySelector('input[type=number]').stepDown(500)"><i class="bi bi-dash-circle"></i></button>
-                    <input  @bind-value ="item.neededQuantity" class="quantity" min="0" type="number">
+                    <input @bind-value="item.neededQuantity" @bind-value:event="oninput"
+                           class="quantity" min="0" type="number">
                     <button onclick="this.parentNode.querySelector('input[type=number]').stepUp(500)"><i class="bi bi-plus-circle"></i></button>
                 </div>
                 <small id="passwordHelpBlock" class="form-text text-muted text-center">
-                    (Note, 1 piece)
+                    (🔥 Note, 1 piece)
                 </small>
             </div>
             <div> @item.neededQuantity</div>
-            <a href="#" class="btn btn-primary" @onclick="() => StartBlinking(item.pinNumber, item.neededQuantity)">Place order</a>
+            <button class="btn btn-primary" @onclick="() => StartBlinking(item.pinNumber, item.neededQuantity)">Place order</button>
         </div>
-            
+
         }
     }
 </div>
 
 @code{
 }
+
+@*@{ if (item.itemName.Equals("Coke"))
+    {
+        <img src='/images/Coke.png'>
+    }
+    else if (item.itemName.Equals("Pepsi"))
+    {
+        <img src='/images/Pepsi.png'>
+    }
+
+    else if (item.itemName.Equals("7up"))
+    {
+        <img src='/images/7up.png'>
+    }
+    else if (item.itemName.Equals("Bear"))
+    {
+        <img src="https://pasteboard.co/JQrrjiI.png">
+    }
+}*@
