@@ -4,7 +4,7 @@
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
 
-<h1>What do you like to place !<i class="bi bi-droplet-half"></i></h1>
+<h1>👋 What do you like to place !</h1>
 
 <p>Led is @BlinkyStatus</p>
 
@@ -16,65 +16,33 @@
 <div class="d-flex flex-wrap">
     @{ foreach (Item item in ItemList)
         {
-        <div class="card" style="width: 400px; height :600px; padding: 15px; margin: 15px">
-            @{ if (item.itemName.Equals("Coke"))
-            {
-                <img src='/images/Coke.png'>
-            }
-            else if (item.itemName.Equals("Pepsi"))
-            {
-                <img src='/images/Pepsi.png'>
-            }
-
-            else if (item.itemName.Equals("7up"))
-            {
-                <img src='/images/7up.png'>
-            }
-            else if (item.itemName.Equals("Bear"))
-            {
-                <img src='/images/Bear.png'>
-            }
-        }
-            <!--<img src="https://i.pravatar.cc/300?img={@item.itemID}" class="card-img-top" alt="...">--> @*//https://i.pravatar.cc/300?img={@item.itemID}*@
-            <div class="card-body">
-                <h5 class="card-title">@item.itemName</h5>
-                <p class="card-text">Left quantity : @item.leftAmount</p>
-                <div class="def-number-input number-input safari_only mb-0 w-100">
-                    <button onclick="this.parentNode.querySelector('input[type=number]').stepDown(500)"><i class="bi bi-dash-circle"></i></button>
-                    <input @bind-value="item.neededQuantity" @bind-value:event="oninput"
-                           class="quantity" min="0" type="number">
-                    <button onclick="this.parentNode.querySelector('input[type=number]').stepUp(500)"><i class="bi bi-plus-circle"></i></button>
+            <div class="card" style="width: 400px; height :600px; padding: 15px; margin: 15px">
+                <img src='Images/@(item.itemName).png'>
+                <div class="card-body">
+                    <h5 class="card-title">@item.itemName</h5>
+                    <p class="card-text">Left quantity : @item.leftAmount</p>
+                    <div class="def-number-input number-input safari_only mb-0 vw-100">
+                        <button @bind="item.neededQuantity" onclick="this.parentNode.querySelector('input[type=number]').stepDown(500)"><i class="bi bi-dash-circle"></i></button>
+                        <input @bind-value="item.neededQuantity" bind-value-oninput="@item.neededQuantity" class="col-xs-2" min="0" type="number">
+                        <button @bind="item.neededQuantity" onclick="this.parentNode.querySelector('input[type=number]').stepUp(500)"><i class="bi bi-plus-circle"></i></button>
+                    </div>
+                    <small id="passwordHelpBlock" class="form-text text-muted text-center">
+                        (🔥 Note, 1 piece)
+                    </small>
                 </div>
-                <small id="passwordHelpBlock" class="form-text text-muted text-center">
-                    (🔥 Note, 1 piece)
-                </small>
-            </div>
-            <div> @item.neededQuantity</div>
-            <button class="btn btn-primary" @onclick="() => StartBlinking(item.pinNumber, item.neededQuantity)">Place order</button>
-        </div>
+                @*<div> @item.neededQuantity</div>*@
+                <button class="btn btn-primary" @onclick="() => StartBlinking(item.pinNumber, item.neededQuantity)">Place order</button>
 
+            </div>
         }
     }
 </div>
 
 @code{
+    public static List<Item> ItemList = new List<Item>() {
+         new Item { itemID = 5,itemName = "Coke", pinNumber = 11 ,leftAmount =5000},
+         new Item { itemID = 16,itemName = "Pepsi", pinNumber = 12 ,leftAmount =4000},
+         new Item { itemID = 45,itemName = "7up", pinNumber = 13 ,leftAmount =5000},
+         new Item { itemID = 63,itemName = "Bear", pinNumber = 15 ,leftAmount =7000 } };
+
 }
-
-@*@{ if (item.itemName.Equals("Coke"))
-    {
-        <img src='/images/Coke.png'>
-    }
-    else if (item.itemName.Equals("Pepsi"))
-    {
-        <img src='/images/Pepsi.png'>
-    }
-
-    else if (item.itemName.Equals("7up"))
-    {
-        <img src='/images/7up.png'>
-    }
-    else if (item.itemName.Equals("Bear"))
-    {
-        <img src="https://pasteboard.co/JQrrjiI.png">
-    }
-}*@

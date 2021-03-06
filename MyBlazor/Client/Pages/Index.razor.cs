@@ -9,12 +9,7 @@ namespace MyBlazor.Client.Pages
 {
     public class IndexPage : ComponentBase
     {
-        public static List<Item> ItemList = new List<Item>() { new Item { itemID = 5,itemName = "Coke", pinNumber = 11 ,leftAmount =5000},
-         new Item { itemID = 16,itemName = "Pepsi", pinNumber = 12 ,leftAmount =4000},
-         new Item { itemID = 45,itemName = "7up", pinNumber = 13 ,leftAmount =5000},
-         new Item { itemID = 63,itemName = "Bear", pinNumber = 15 ,leftAmount =7000 } };
-
-
+        
         [Inject]
         public HttpClient HttpClient { get; set; }
 
