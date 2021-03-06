@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using MyBlazor.Server.Controllers;
 using System.Net.Http;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace MyBlazor.Client.Pages
@@ -39,6 +40,10 @@ namespace MyBlazor.Client.Pages
         }
         protected async Task SendItem(Item item)
         {
+            byte[] jsonUtf8Bytes;
+            var options = new JsonSerializerOptions{WriteIndented = true};
+            jsonUtf8Bytes = JsonSerializer.SerializeToUtf8Bytes(item, options);
+            string jsonString = JsonSerializer.Serialize(item);
             await HttpClient.GetStringAsync("/api/Item/SendItem/"+item);
         }
         [JSInvokable]

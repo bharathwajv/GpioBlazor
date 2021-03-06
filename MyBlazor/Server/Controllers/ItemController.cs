@@ -12,7 +12,7 @@ namespace MyBlazor.Server.Controllers
         {
             _itemSenderUtility = ItemSenderUtility;
         }
-        [HttpGet("[action]")]
+        [HttpGet("[action]/{item}")]
         public void SendItem(Item item)
         {
             _itemSenderUtility.SendItemJson(item);
