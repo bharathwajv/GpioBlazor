@@ -1,45 +1,43 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using MyBlazor.Server.Interfaces;
 
 namespace MyBlazor.Server.Controllers
 {
     [Route("api/[controller]")]
-    public class BlinkyController
+    [ApiController]
+    public class BlinkyController : ControllerBase
     {
-        private readonly LedBlinkClient _blinkClient;
 
-        public BlinkyController(LedBlinkClient blinkClient)
+        private IBlink _ledBlinkUtility;
+        public BlinkyController(IBlink LedBlinkUtility)
         {
-            _blinkClient = blinkClient;
+            _ledBlinkUtility = LedBlinkUtility;
         }
 
         [HttpGet("[action]")]
         public bool IsBlinking()
         {
-            return _blinkClient.IsBlinking;
+            return _ledBlinkUtility.IsBlinking;
         }
 
         [HttpGet("[action]")]
         public void StartBlinking()
         {
-            _blinkClient.StartBlinking();
+            _ledBlinkUtility.StartBlinking();
         }
 
         [HttpGet("[action]")]
         public void StopBlinking()
         {
-            _blinkClient.StopBlinking();
+            _ledBlinkUtility.StopBlinking();
         }
-        [HttpGet("[action]/{pinNumber}/{neededQuantity}")]
+        [HttpPost("[action]/{pinNumber}/{neededQuantity}")]
          public void StartBlinking(int pinNumber, int neededQuantity)
         {
-             _blinkClient.StopBlinking();
+            _ledBlinkUtility.StopBlinking();
              Console.WriteLine("came in "+pinNumber);
-             _blinkClient.StartBlinking(pinNumber, neededQuantity);
+            _ledBlinkUtility.StartBlinking(pinNumber, neededQuantity);
         }
     }
 }

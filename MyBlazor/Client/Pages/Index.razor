@@ -16,24 +16,25 @@
 <div class="d-flex flex-wrap">
     @{ foreach (Item item in ItemList)
         {
-            <div class="card" style="width: 400px; height :600px; padding: 15px; margin: 15px">
-                <img src='Images/@(item.itemName).png'>
-                <div class="card-body">
-                    <h5 class="card-title">@item.itemName</h5>
-                    <p class="card-text">Left quantity : @item.leftAmount</p>
-                    <div class="def-number-input number-input safari_only mb-0 vw-100">
-                        <button @bind="item.neededQuantity" onclick="this.parentNode.querySelector('input[type=number]').stepDown(500)"><i class="bi bi-dash-circle"></i></button>
-                        <input @bind-value="item.neededQuantity" bind-value-oninput="@item.neededQuantity" class="col-xs-2" min="0" type="number">
-                        <button @bind="item.neededQuantity" onclick="this.parentNode.querySelector('input[type=number]').stepUp(500)"><i class="bi bi-plus-circle"></i></button>
-                    </div>
-                    <small id="passwordHelpBlock" class="form-text text-muted text-center">
-                        (🔥 Note, 1 piece)
-                    </small>
+        <div class="card" style="width: 400px; height :600px; padding: 15px; margin: 15px">
+            <img src='Images/@(item.itemName).png'>
+            <div class="card-body">
+                <h5 class="card-title">@item.itemName</h5>
+                <p class="card-text">Left quantity : @item.leftAmount</p>
+                <div class="def-number-input number-input safari_only mb-0 vw-100">
+                    <button @bind="item.neededQuantity" onclick="this.parentNode.querySelector('input[type=number]').stepDown(500)"><i class="bi bi-dash-circle"></i></button>
+                    <input @bind-value="item.neededQuantity" bind-value-oninput="@item.neededQuantity" class="col-xs-2" min="0" type="number">
+                    <button @bind="item.neededQuantity" onclick="this.parentNode.querySelector('input[type=number]').stepUp(500)"><i class="bi bi-plus-circle"></i></button>
                 </div>
-                @*<div> @item.neededQuantity</div>*@
-                <button class="btn btn-primary" @onclick="() => StartBlinking(item.pinNumber, item.neededQuantity)">Place order</button>
-
+                <small id="passwordHelpBlock" class="form-text text-muted text-center">
+                    (🔥 Note, 1 piece)
+                </small>
             </div>
+            @*<div> @item.neededQuantity</div>*@
+            <button class="btn btn-primary" @onclick="() => StartBlinking(item.pinNumber, item.neededQuantity)">Place order</button>
+            <button class="btn btn-primary" @onclick="() => SendItem(item)">OrderSendJson</button>
+
+        </div>
         }
     }
 </div>

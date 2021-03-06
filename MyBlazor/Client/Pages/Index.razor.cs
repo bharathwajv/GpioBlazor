@@ -1,9 +1,8 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
-using System.Collections.Generic;
+using MyBlazor.Server.Controllers;
 using System.Net.Http;
 using System.Threading.Tasks;
-using MyBlazor.Server.Controllers;
 
 namespace MyBlazor.Client.Pages
 {
@@ -38,7 +37,10 @@ namespace MyBlazor.Client.Pages
         {
             await HttpClient.GetStringAsync("/api/Blinky/StopBlinking");
         }
-
+        protected async Task SendItem(Item item)
+        {
+            await HttpClient.GetStringAsync("/api/Item/SendItem/"+item);
+        }
         [JSInvokable]
         public async Task UpdateStatus()
         {
