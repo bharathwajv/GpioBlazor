@@ -3,6 +3,7 @@ using Microsoft.JSInterop;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
+using MyBlazor.Server.Controllers;
 
 namespace MyBlazor.Client.Pages
 {
