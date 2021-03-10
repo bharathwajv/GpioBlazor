@@ -1,5 +1,7 @@
 ﻿@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
-
+.card {
+    box-shadow: -15px 15px 24px #d1d1d1, 15px -15px 24px #ffffff;
+}
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
