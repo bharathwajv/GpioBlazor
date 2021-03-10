@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MyBlazor.Server
 {
-    public class LedBlinkUtility : IDisposable , IBlink
+    public class LedBlinkUtility : IDisposable, IBlink
     {
         private const int LedPin = 10;
 
@@ -14,10 +14,14 @@ namespace MyBlazor.Server
         private object _locker = new object();
         private bool _isBlinking = false;
 
-        private Task _blinkTask; 
+        private Task _blinkTask;
         private CancellationTokenSource _tokenSource;
         private CancellationToken _token;
 
+        //public LedBlinkUtility(CancellationTokenSource cts, CancellationToken ct,)
+        //{
+
+        //}
         public void StartBlinking()
         {
 

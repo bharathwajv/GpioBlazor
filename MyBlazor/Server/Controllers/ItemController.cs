@@ -12,10 +12,15 @@ namespace MyBlazor.Server.Controllers
         {
             _itemSenderUtility = ItemSenderUtility;
         }
-        [HttpGet("[action]/{item}")]
-        public void SendItem(Item item)
+        [HttpPost]
+        public async System.Threading.Tasks.Task SendItemAsync(Item item)
         {
-            _itemSenderUtility.SendItemJson(item);
+            await _itemSenderUtility.SendItemJson(item);
+        }
+        [HttpGet]
+        public async System.Threading.Tasks.Task GetItemAsync()
+        {
+            await _itemSenderUtility.GetItemJson();
         }
     }
 }

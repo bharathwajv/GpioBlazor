@@ -6,6 +6,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using MyBlazor.Server.Interfaces;
+using MyBlazor.Server.Utilitys;
 using System.Linq;
 
 namespace MyBlazor.Server
@@ -27,6 +29,8 @@ namespace MyBlazor.Server
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddTransient<LedBlinkUtility>();
+            services.AddTransient<IBlink,LedBlinkUtility>();
+            services.AddSingleton<IItemSender,ItemSenderUtility>();
 
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
