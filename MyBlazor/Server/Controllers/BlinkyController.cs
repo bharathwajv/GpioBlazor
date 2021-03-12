@@ -35,7 +35,7 @@ namespace MyBlazor.Server.Controllers
         [HttpPost("[action]/{pinNumber}/{neededQuantity}")]
          public void StartBlinking(int pinNumber, int neededQuantity)
         {
-            _ledBlinkUtility.StopBlinking();
+            //_ledBlinkUtility.StopBlinking();
              Console.WriteLine("came in "+pinNumber);
             _ledBlinkUtility.StartBlinking(pinNumber, neededQuantity);
         }
