@@ -4,6 +4,8 @@
     <TargetFramework>net5.0</TargetFramework>
     <UserSecretsId>1c6bd37d-ae39-44ad-8360-f0d909867620</UserSecretsId>
 	  <OutputType>Exe</OutputType>
+	  <BlazorCacheBootResources>false</BlazorCacheBootResources>
+	  <DisableGitAutoCRLFInPublishOutput>true</DisableGitAutoCRLFInPublishOutput>
   </PropertyGroup>
 
   <ItemGroup>

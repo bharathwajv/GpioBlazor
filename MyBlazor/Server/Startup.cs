@@ -1,8 +1,8 @@
 //using blazorservercrudefsqlite.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpOverrides;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -39,8 +39,12 @@ namespace MyBlazor.Server
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
             });
             services.AddControllers();
+            services.AddHttpsRedirection(options =>
+            {
+                options.RedirectStatusCode = StatusCodes.Status308PermanentRedirect;
+                options.HttpsPort = 443;
+            });
 
-           
             //services.AddDbContext<ProductDbContext>(options =>
             //{
             //    options.UseSqlite("Data Source = Products.db");
@@ -70,7 +74,7 @@ namespace MyBlazor.Server
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseHttpsRedirection();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
@@ -90,16 +94,16 @@ namespace MyBlazor.Server
             {
                 ForwardedHeaders = ForwardedHeaders.All
             });
-            //app.Use(async (context, next) =>
-            //{
-            //    var forwardedPath = context.Request.Headers["X-Forwarded-Path"].FirstOrDefault();
-            //    if (!string.IsNullOrEmpty(forwardedPath))
-            //    {
-            //        context.Request.PathBase = forwardedPath;
-            //    }
+            app.Use(async (context, next) =>
+            {
+                var forwardedPath = context.Request.Headers["X-Forwarded-Path"].FirstOrDefault();
+                if (!string.IsNullOrEmpty(forwardedPath))
+                {
+                    context.Request.PathBase = forwardedPath;
+                }
 
-            //    await next();
-            //});
+                await next();
+            });
         }
     }
 }
