@@ -12,15 +12,26 @@ namespace MyBlazor.Server.Controllers
         {
             _itemSenderUtility = ItemSenderUtility;
         }
-        [HttpPost]
-        public async System.Threading.Tasks.Task SendItemAsync(Item item)
+        [HttpPost("item")]
+        public async System.Threading.Tasks.Task<IActionResult> SendItemAsync(Item item)
         {
-            await _itemSenderUtility.SendItemJson(item);
+            return Ok(await _itemSenderUtility.SendItemJson(item));
         }
-        [HttpGet]
-        public async System.Threading.Tasks.Task GetItemAsync()
+        [HttpPost("status")]
+        public async System.Threading.Tasks.Task<IActionResult> SendStationStatus(string status)
         {
-            await _itemSenderUtility.GetItemJson();
+            return Ok(await _itemSenderUtility.SendStationStatus(status));
         }
+        [HttpGet("GetItem")]
+        public async System.Threading.Tasks.Task<IActionResult> GetItemAsync()
+        {
+            return Ok(await _itemSenderUtility.GetItemJson());
+        }
+        [HttpGet("GetStation")]
+        public async System.Threading.Tasks.Task<IActionResult> GetStationStatus()
+        {
+            return Ok(await _itemSenderUtility.GetStationStatus());
+        }
+        
     }
 }
