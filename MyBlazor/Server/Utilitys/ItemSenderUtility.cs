@@ -47,6 +47,19 @@ namespace MyBlazor.Server.Utilitys
             // return Json(JsonString, JsonRequestBehavior.AllowGet);
             //return JsonString;
         }
+        public async Task<string> DeleteItem([FromBody] Item item)
+        {
+            try
+            {
+                return "Deleted";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+            // return Json(JsonString, JsonRequestBehavior.AllowGet);
+            //return JsonString;
+        }
         public async Task<string> SendStationStatus([FromBody]string status)
         {
             try

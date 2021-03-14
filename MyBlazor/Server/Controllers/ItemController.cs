@@ -32,6 +32,10 @@ namespace MyBlazor.Server.Controllers
         {
             return Ok(await _itemSenderUtility.GetStationStatus());
         }
-        
+        [HttpDelete("DeleteItem")]
+        public async System.Threading.Tasks.Task<IActionResult> DeleteItem(Item item)
+        {
+            return Ok(await _itemSenderUtility.DeleteItem(item));
+        }
     }
 }

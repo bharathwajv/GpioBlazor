@@ -10,5 +10,7 @@ namespace MyBlazor.Server.Interfaces
         public Task<string> GetItemJson();
         public Task<string> GetStationStatus();
         public Task<string> SendStationStatus(string status);
+
+        public Task<string> DeleteItem(Item item);
     }
 }
