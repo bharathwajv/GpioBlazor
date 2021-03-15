@@ -13,7 +13,7 @@ namespace MyBlazor.Server.Controllers
             _itemSenderUtility = ItemSenderUtility;
         }
         [HttpPost("item")]
-        public async System.Threading.Tasks.Task<IActionResult> SendItemAsync(Item item)
+        public async System.Threading.Tasks.Task<IActionResult> SendItemAsync(ItemModel item)
         {
             return Ok(await _itemSenderUtility.SendItemJson(item));
             //comment
@@ -34,7 +34,7 @@ namespace MyBlazor.Server.Controllers
             return Ok(await _itemSenderUtility.GetStationStatus());
         }
         [HttpDelete("DeleteItem")]
-        public async System.Threading.Tasks.Task<IActionResult> DeleteItem(Item item)
+        public async System.Threading.Tasks.Task<IActionResult> DeleteItem(ItemModel item)
         {
             return Ok(await _itemSenderUtility.DeleteItem(item));
         }

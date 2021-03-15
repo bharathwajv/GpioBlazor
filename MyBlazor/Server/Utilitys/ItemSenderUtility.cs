@@ -26,14 +26,13 @@ namespace MyBlazor.Server.Utilitys
             set => _statusString = value;
         }
 
-        public async Task<string> SendItemJson([FromBody]Item item)
+        public async Task<string> SendItemJson([FromBody]ItemModel item)
         {
             //byte[] jsonUtf8Bytes;
             var options = new JsonSerializerOptions
             {
                 WriteIndented = true
             };
-            Console.WriteLine("pin number, "+item.pinNumber);
             Console.WriteLine("item Id, "+item.itemID);
             JsonString = System.Text.Json.JsonSerializer.Serialize(item);
             return "Item Added";
@@ -47,7 +46,7 @@ namespace MyBlazor.Server.Utilitys
             // return Json(JsonString, JsonRequestBehavior.AllowGet);
             //return JsonString;
         }
-        public async Task<string> DeleteItem([FromBody] Item item)
+        public async Task<string> DeleteItem([FromBody] ItemModel item)
         {
             try
             {

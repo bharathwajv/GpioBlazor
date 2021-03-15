@@ -29,7 +29,7 @@ namespace MyBlazor.Server
 
             services.AddControllersWithViews();
             services.AddRazorPages();
-            services.AddTransient<LedBlinkUtility>();
+            //services.AddTransient<LedBlinkUtility>();
             services.AddTransient<IBlink,LedBlinkUtility>();
             services.AddSingleton<IItemSender,ItemSenderUtility>();
 
