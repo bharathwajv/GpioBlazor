@@ -14,7 +14,7 @@
 </div>
 <br />
 <div class="d-flex flex-wrap">
-    @{ foreach (Item item in ItemList)
+    @{ foreach (ItemModel item in ItemList)
         {
         <div class="card" style="width: 400px; height :600px; padding: 15px; margin: 15px">
             <img src='Images/@(item.itemName).png'>
@@ -31,7 +31,7 @@
                 </small>
             </div>
             @*<div> @item.neededQuantity</div>*@
-            <button class="btn btn-primary" @onclick="() => StartBlinking(item.pinNumber, item.neededQuantity)">Place order</button>
+            <button class="btn btn-primary" @onclick="() => StartBlinking(item.neededQuantity)">Place order</button>
             <button class="btn btn-primary" @onclick="() => SendItem(item)">OrderSendJson</button>
 
         </div>
@@ -40,10 +40,10 @@
 </div>
 
 @code{
-    public static List<Item> ItemList = new List<Item>() {
-         new Item { itemID = 5,itemName = "Coke", pinNumber = 11 ,leftAmount =5000},
-         new Item { itemID = 16,itemName = "Pepsi", pinNumber = 12 ,leftAmount =4000},
-         new Item { itemID = 45,itemName = "7up", pinNumber = 13 ,leftAmount =5000},
-         new Item { itemID = 63,itemName = "Bear", pinNumber = 15 ,leftAmount =7000 } };
+    public static List<ItemModel> ItemList = new List<ItemModel>() {
+         new ItemModel { itemID = 5,itemName = "Coke",leftAmount =5000},
+         new ItemModel { itemID = 16,itemName = "Pepsi",leftAmount =4000},
+         new ItemModel { itemID = 45,itemName = "7up",leftAmount =5000},
+         new ItemModel { itemID = 63,itemName = "Bear",leftAmount =7000 } };
 
 }

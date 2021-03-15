@@ -29,21 +29,17 @@ namespace MyBlazor.Client.Pages
         {
             await HttpClient.GetStringAsync("/api/Blinky/StartBlinking");
         }
-        protected async Task StartBlinking(int pinNumber, int neededQuantity)
+        protected async Task StartBlinking(int neededQuantity)
         {
-            await HttpClient.GetStringAsync("/api/Blinky/StartBlinking/"+ pinNumber+"/"+ neededQuantity);
+            await HttpClient.GetStringAsync("/api/Blinky/StartBlinking/"+ neededQuantity);
         }
 
         protected async Task StopBlinking()
         {
             await HttpClient.GetStringAsync("/api/Blinky/StopBlinking");
         }
-        protected async Task SendItem(Item item)
+        protected async Task SendItem(ItemModel item)
         {
-            byte[] jsonUtf8Bytes;
-            var options = new JsonSerializerOptions{WriteIndented = true};
-            jsonUtf8Bytes = JsonSerializer.SerializeToUtf8Bytes(item, options);
-            string jsonString = JsonSerializer.Serialize(item);
             await HttpClient.GetStringAsync("/api/Item/SendItem/"+item);
         }
         [JSInvokable]

@@ -5,6 +5,6 @@
         bool IsBlinking { get; }
         public void StartBlinking();
         public void StopBlinking();
-        public void StartBlinking(int pinNumber, int neededQuantity);
+        public void StartBlinking(int neededQuantity);
     }
 }

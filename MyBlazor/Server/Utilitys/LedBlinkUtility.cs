@@ -118,7 +118,7 @@ namespace MyBlazor.Server
             Dispose(true);
         }
 
-        public void StartBlinking(int pinNumber, int neededQuantity)
+        public void StartBlinking(int neededQuantity)
         {
 
                 if (_blinkTask != null)
@@ -133,7 +133,7 @@ namespace MyBlazor.Server
                 {
                     using (var controller = new GpioController(PinNumberingScheme.Board))
                     {
-                        controller.OpenPin(pinNumber, PinMode.Output);
+                        controller.OpenPin(LedPin, PinMode.Output);
 
                         _isBlinking = true;
                         Console.WriteLine("Entered custom");
@@ -144,9 +144,9 @@ namespace MyBlazor.Server
                                 break;
                             }
                             Console.WriteLine("Drop quantity "+neededQuantity);
-                            controller.Write(pinNumber, PinValue.Low);
+                            controller.Write(LedPin, PinValue.Low);
                             Thread.Sleep(neededQuantity);
-                            controller.Write(pinNumber, PinValue.High);
+                            controller.Write(LedPin, PinValue.High);
                             Thread.Sleep(neededQuantity);
                         }
 
